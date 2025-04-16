@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "abouts",
+  "info": {
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "About",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "introduction": {
+      "type": "text"
+    },
+    "leadership": {
+      "type": "text"
+    },
+    "academicCommittee": {
+      "type": "text"
+    },
+    "facultyAndResearchers": {
+      "type": "text"
+    },
+    "visitingProfessors": {
+      "type": "text"
+    }
+  }
+}

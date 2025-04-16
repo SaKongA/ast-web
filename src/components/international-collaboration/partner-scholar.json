@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_international_collaboration_partner_scholars",
+  "info": {
+    "displayName": "PartnerScholar"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "collaborationDate": {
+      "type": "date"
+    },
+    "description": {
+      "type": "text"
+    },
+    "photo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

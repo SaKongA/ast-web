@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "international_collaborations",
+  "info": {
+    "singularName": "international-collaboration",
+    "pluralName": "international-collaborations",
+    "displayName": "International Collaboration"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "PartnerInstitute": {
+      "displayName": "PartnerInstitute",
+      "type": "component",
+      "repeatable": false,
+      "component": "international-collaboration.partner-institute"
+    },
+    "PartnerScholar": {
+      "displayName": "PartnerScholar",
+      "type": "component",
+      "repeatable": false,
+      "component": "international-collaboration.partner-scholar"
+    }
+  }
+}
