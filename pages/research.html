@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>科研成果 - 亚洲科学技术研究院</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="/styles/global.css">
+  <style>
+    /* 科研成果页面特定样式 */
+    .page-header {
+      position: relative;
+      margin-top: 0;
+      padding: 320px 0 120px;
+      text-align: center;
+      overflow: hidden;
+      color: #fff;
+    }
+    
+    .header-bg-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+    
+    .header-bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 200%;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/research-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+      animation: slowZoom 20s infinite alternate;
+      z-index: -1;
+    }
+    
+    .header-bg-image.loaded {
+      opacity: 1;
+    }
+    
+    .header-bg-gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to bottom, transparent, var(--background-dark));
+      z-index: 0;
+    }
+    
+    @keyframes slowZoom {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+    
+    .page-title {
+      position: relative;
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+    
+    .page-description {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-secondary);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+    
+    /* 搜索和分类过滤器 */
+    .filters-section {
+      padding: 20px 0;
+      background-color: #0a0a0a;
+      border-bottom: 1px solid #222;
+    }
+    
+    .filters-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .search-container {
+      width: 100%;
+      max-width: 800px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 12px 20px;
+      padding-right: 50px;
+      border-radius: 30px;
+      border: 1px solid var(--border-color);
+      background-color: #121212;
+      color: var(--text-primary);
+      font-size: 1rem;
+    }
+    
+    .search-icon {
+      position: absolute;
+      right: 25px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      pointer-events: none;
+    }
+    
+    .categories-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .category-btn {
+      padding: 8px 16px;
+      border-radius: 30px;
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      margin: 0 5px;
+    }
+    
+    .category-btn.active, 
+    .category-btn:hover {
+      background-color: #1e88e5;
+      color: white;
+      border-color: #1e88e5;
+    }
+    
+    /* 研究成果列表 */
+    .research-list {
+      padding: 60px 0;
+    }
+    
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 30px;
+    }
+    
+    .research-item {
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: var(--background-card);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .research-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+    
+    .research-header {
+      padding: 25px;
+      border-bottom: 1px solid var(--border-color);
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+    
+    .research-title {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+    
+    .research-meta {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .research-author, 
+    .research-date {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .research-author i,
+    .research-date i {
+      margin-right: 6px;
+      color: var(--primary-color);
+    }
+    
+    .research-body {
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .research-summary {
+      font-weight: 500;
+      margin-bottom: 20px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 1rem;
+      flex-grow: 1;
+    }
+    
+    .btn-detail {
+      margin-top: 20px;
+      display: block;
+      text-align: center;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    
+    .btn-detail:hover {
+      background-color: #1565c0;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .btn-detail i {
+      margin-left: 8px;
+    }
+    
+    .no-research {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-tertiary);
+      grid-column: 1 / -1;
+    }
+    
+    /* 分页 */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+      gap: 5px;
+    }
+    
+    .pagination-btn {
+      padding: 8px 15px;
+      border-radius: 5px;
+      background-color: var(--background-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .pagination-btn:hover:not(.active) {
+      background-color: var(--border-color);
+    }
+    
+    .pagination-btn.active {
+      background-color: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+    
+    .pagination-btn.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    /* 加载中动画 */
+    .loading {
+      display: flex;
+      justify-content: center;
+      padding: 50px 0;
+      grid-column: 1 / -1;
+    }
+    
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(30, 136, 229, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary-color);
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 100px 0 40px;
+      }
+      
+      .page-title {
+        font-size: 2rem;
+      }
+      
+      .research-list {
+        padding: 40px 0;
+      }
+      
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .categories-container {
+        margin-top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <div id="navbar-container"></div>
+  
+  <!-- 页面头部 -->
+  <header class="page-header">
+    <div class="header-bg-container">
+      <div class="header-bg-image"></div>
+      <div class="header-bg-gradient"></div>
+    </div>
+    <div class="container">
+      <h1 class="page-title">科研成果</h1>
+      <p class="page-description">亚洲科学技术研究院最新科研成果和学术论文</p>
+    </div>
+  </header>
+  
+  <!-- 搜索和过滤器 -->
+  <section class="filters-section">
+    <div class="container">
+      <div class="filters-container">
+        <div class="search-container">
+          <input type="text" id="search-input" class="search-input" placeholder="搜索科研成果..." aria-label="搜索科研成果">
+          <i class="fas fa-search search-icon"></i>
+        </div>
+      <div class="categories-container">
+        <button class="category-btn active" data-category="all">全部</button>
+        <button class="category-btn" data-category="technology">技术研究</button>
+        <button class="category-btn" data-category="science">自然科学</button>
+        <button class="category-btn" data-category="humanities">人文社科</button>
+        <button class="category-btn" data-category="innovation">创新科技</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 研究成果列表 -->
+  <section class="research-list">
+    <div class="container">
+      <div id="research-container" class="research-grid">
+        <div class="loading">
+          <div class="loading-spinner"></div>
+        </div>
+      </div>
+      
+      <!-- 分页控件 -->
+      <div id="pagination" class="pagination"></div>
+    </div>
+  </section>
+  
+  <!-- 页脚 -->
+  <div id="footer-container"></div>
+  
+  <!-- 脚本 -->
+  <script src="/components/Navbar.js"></script>
+  <script src="/components/Footer.js"></script>
+  <script src="/components/Api.js"></script>
+  <script src="/js/research.js"></script>
+  <script>
+    // 初始化导航栏和页脚
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('navbar-container').innerHTML = renderNavbar();
+      document.getElementById('footer-container').innerHTML = renderFooter();
+      
+      // 初始化科研成果数据
+      initResearch();
+      preloadBackgroundImage(); // 预加载背景图片
+    });
+    
+    // 全局变量
+    let allResearch = [];
+    let filteredResearch = [];
+    let currentPage = 1;
+    const itemsPerPage = 6;
+    
+    // 初始化科研成果数据
+    async function initResearch() {
+      try {
+        const researchData = await API.fetchResearch();
+        
+        if (!researchData || !researchData.data || researchData.data.length === 0) {
+          showNoResearch();
+          return;
+        }
+        
+        // 存储所有科研成果数据
+        allResearch = researchData.data.sort((a, b) => {
+          const dateA = new Date(a.publishedAt || a.createdAt);
+          const dateB = new Date(b.publishedAt || b.createdAt);
+          return dateB - dateA;
+        });
+        
+        // 初始应用筛选
+        filteredResearch = [...allResearch];
+        
+        // 设置事件监听器
+        setupEventListeners();
+        
+        // 渲染科研成果和分页
+        renderResearch();
+        renderPagination();
+        
+      } catch (error) {
+        console.error('加载科研成果数据出错:', error);
+        showError('加载科研成果信息出错，请稍后再试');
+      }
+    }
+    
+    // 设置事件监听器
+    function setupEventListeners() {
+      // 搜索框
+      const searchInput = document.getElementById('search-input');
+      searchInput.addEventListener('input', debounce(filterResearch, 300));
+      
+      // 分类按钮
+      const categoryButtons = document.querySelectorAll('.category-btn');
+      categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // 移除所有按钮的active类
+          categoryButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // 给当前点击的按钮添加active类
+          this.classList.add('active');
+          
+          // 应用过滤
+          filterResearch();
+        });
+      });
+    }
+    
+    // 过滤科研成果数据
+    function filterResearch() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+      const selectedCategory = document.querySelector('.category-btn.active').getAttribute('data-category');
+      
+      filteredResearch = allResearch.filter(research => {
+        // 搜索过滤
+        const matchesSearch = 
+          !searchTerm || 
+          research.title.toLowerCase().includes(searchTerm) ||
+          (research.summary && research.summary.toLowerCase().includes(searchTerm)) ||
+          (research.content && research.content.toLowerCase().includes(searchTerm)) ||
+          (research.author && research.author.toLowerCase().includes(searchTerm));
+        
+        // 分类过滤
+        const matchesCategory = selectedCategory === 'all' || 
+          (research.category && research.category === selectedCategory);
+        
+        return matchesSearch && matchesCategory;
+      });
+      
+      // 重置到第一页并重新渲染
+      currentPage = 1;
+      renderResearch();
+      renderPagination();
+    }
+    
+    // 渲染科研成果数据
+    function renderResearch() {
+      const researchContainer = document.getElementById('research-container');
+      researchContainer.innerHTML = '';
+      
+      if (filteredResearch.length === 0) {
+        showNoResearch();
+        return;
+      }
+      
+      // 计算当前页的科研成果
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = Math.min(startIndex + itemsPerPage, filteredResearch.length);
+      const currentPageResearch = filteredResearch.slice(startIndex, endIndex);
+      
+      currentPageResearch.forEach(research => {
+        const formattedDate = research.date ? API.formatDate(research.date) : API.formatDate(research.createdAt);
+        
+        const researchElement = document.createElement('div');
+        researchElement.className = 'research-item';
+        researchElement.innerHTML = `
+          <div class="research-header">
+            <h2 class="research-title">${research.title}</h2>
+            <div class="research-meta">
+              <p class="research-author"><i class="far fa-user"></i> ${research.author || '未知作者'}</p>
+              <p class="research-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</p>
+            </div>
+          </div>
+          <div class="research-body">
+            <p class="research-summary">${research.summary || ''}</p>
+            <a href="/pages/research-detail.html?id=${research.id}" class="btn-detail">
+              查看详情 <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        `;
+        
+        researchContainer.appendChild(researchElement);
+      });
+    }
+    
+    // 渲染分页控件
+    function renderPagination() {
+      const paginationContainer = document.getElementById('pagination');
+      paginationContainer.innerHTML = '';
+      
+      if (filteredResearch.length === 0) {
+        return;
+      }
+      
+      const totalPages = Math.ceil(filteredResearch.length / itemsPerPage);
+      
+      if (totalPages <= 1) {
+        return;
+      }
+      
+      // 添加上一页按钮
+      const prevBtn = document.createElement('button');
+      prevBtn.className = `pagination-btn ${currentPage === 1 ? 'disabled' : ''}`;
+      prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderResearch();
+          renderPagination();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+      paginationContainer.appendChild(prevBtn);
+      
+      // 添加页码按钮
+      const maxVisiblePages = 5;
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+      
+      if (endPage - startPage + 1 < maxVisiblePages) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+      }
+      
+      for (let i = startPage; i <= endPage; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
+        pageBtn.textContent = i;
+        pageBtn.addEventListener('click', () => {
+          currentPage = i;
+          renderResearch();
+          renderPagination();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        paginationContainer.appendChild(pageBtn);
+      }
+      
+      // 添加下一页按钮
+      const nextBtn = document.createElement('button');
+      nextBtn.className = `pagination-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+      nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderResearch();
+          renderPagination();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+      paginationContainer.appendChild(nextBtn);
+    }
+    
+    // 显示无科研成果信息
+    function showNoResearch() {
+      const researchContainer = document.getElementById('research-container');
+      researchContainer.innerHTML = '<div class="no-research">暂无符合条件的科研成果</div>';
+      
+      // 清空分页
+      document.getElementById('pagination').innerHTML = '';
+    }
+    
+    // 显示错误信息
+    function showError(message) {
+      const researchContainer = document.getElementById('research-container');
+      researchContainer.innerHTML = `<div class="no-research">${message}</div>`;
+      
+      // 清空分页
+      document.getElementById('pagination').innerHTML = '';
+    }
+    
+    // 防抖函数
+    function debounce(func, delay) {
+      let timeout;
+      return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), delay);
+      };
+    }
+  </script>
+</body>
+</html> 

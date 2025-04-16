@@ -1,0 +1,81 @@
+/* 研究页面特定样式 */
+.research-categories {
+  padding: 30px 0;
+  background-color: #f8f9fa;
+}
+
+.categories-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.category-btn {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.category-btn.active, .category-btn:hover {
+  background-color: #1a1a2e;
+  color: white;
+  border-color: #1a1a2e;
+}
+
+.research-list {
+  padding: 70px 0;
+}
+
+.research-item {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.research-header {
+  padding: 25px;
+  background-color: #f8f9fa;
+}
+
+.research-title {
+  margin: 0 0 15px 0;
+  color: #1a1a2e;
+}
+
+.research-meta {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.research-body {
+  padding: 25px;
+}
+
+.research-summary {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.research-content {
+  line-height: 1.8;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .research-list {
+    padding: 50px 0;
+  }
+  
+  .research-meta {
+    flex-direction: column;
+    gap: 5px;
+  }
+} 

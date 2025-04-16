@@ -1,0 +1,322 @@
+/* 优化后的关于页面样式 */
+/* 页面头部 */
+.page-header {
+  position: relative;
+  margin-top: 0;
+  padding: 320px 0 250px;
+  text-align: center;
+  overflow: hidden;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.header-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/about-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+  animation: slowZoom 20s infinite alternate;
+  z-index: -1;
+}
+
+.header-bg-image.loaded {
+  opacity: 1;
+}
+
+.header-bg-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, var(--background-dark));
+  z-index: 0;
+}
+
+@keyframes slowZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page-title {
+  position: relative;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.page-description {
+  position: relative;
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* 内容区域 */
+.about-content-wrapper {
+  position: relative;
+  margin-top: 0;
+  z-index: 2;
+}
+
+.about-section {
+  padding: 80px 0 60px;
+  background-color: var(--background-dark);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* 关于卡片 */
+.about-card {
+  background-color: var(--background-card);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  margin-bottom: 25px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.about-card:nth-child(1) { animation-delay: 0.1s; }
+.about-card:nth-child(2) { animation-delay: 0.2s; }
+.about-card:nth-child(3) { animation-delay: 0.3s; }
+.about-card:nth-child(4) { animation-delay: 0.4s; }
+.about-card:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 卡片标题 */
+.info-title {
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  padding: 15px 20px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-title i {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+/* 卡片内容 */
+.card-content {
+  padding: 20px;
+}
+
+/* 文本样式 */
+.about-text {
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.about-text p {
+  margin-bottom: 1em;
+  color: var(--text-secondary);
+  text-indent: 2em;
+}
+
+/* 组织结构样式 */
+.staff-section {
+  margin-bottom: 35px;
+}
+
+.staff-section:last-child {
+  margin-bottom: 0;
+}
+
+.staff-title {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* 名单列表 */
+.staff-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.staff-item {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255,255,255,0.03);
+  padding: 15px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.staff-item:hover {
+  background-color: rgba(255,255,255,0.06);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.staff-role {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.staff-name {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.term-info {
+  font-size: 0.9em;
+  color: var(--text-tertiary);
+  margin-top: 8px;
+}
+
+/* 删除不再使用的委员列表样式 */
+.committee-list,
+.committee-item {
+  display: none;
+}
+
+/* 加载状态 */
+.loading-indicator {
+  text-align: center;
+  padding: 25px;
+  color: var(--text-tertiary);
+}
+
+.loading-indicator i {
+  margin-right: 10px;
+  color: var(--primary-color);
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+  .staff-list {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    padding: 100px 0;
+    height: 250px;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .about-content-wrapper {
+    margin-top: -35px;
+  }
+  
+  .about-section {
+    padding: 25px 20px 40px;
+  }
+  
+  .info-title {
+    font-size: 1.3rem;
+    padding: 12px 15px;
+  }
+  
+  .card-content {
+    padding: 15px;
+  }
+  
+  .staff-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+  
+  .staff-item {
+    padding: 12px 10px;
+  }
+  
+  .staff-name {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .staff-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .page-header {
+    padding: 80px 0;
+    height: 220px;
+  }
+  
+  .page-title {
+    font-size: 1.8rem;
+  }
+  
+  .about-content-wrapper {
+    margin-top: -30px;
+  }
+  
+  .info-title {
+    font-size: 1.2rem;
+  }
+  
+  .staff-title {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .staff-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

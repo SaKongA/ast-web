@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学术会议 - 亚洲科学技术研究院</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="/styles/global.css">
+  <link rel="stylesheet" href="/styles/conferences.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <div id="navbar-container"></div>
+  
+  <!-- 页面头部 -->
+  <header class="page-header">
+    <div class="header-bg-container">
+      <div class="header-bg-image"></div>
+      <div class="header-bg-gradient"></div>
+    </div>
+    <div class="container">
+      <h1 class="page-title">学术会议</h1>
+      <p class="page-description">亚洲科学技术研究院举办和参与的学术会议信息</p>
+    </div>
+  </header>
+  
+  <!-- 搜索和过滤器 -->
+  <section class="filters-section">
+    <div class="container">
+      <div class="filters-container">
+        <div class="search-container">
+          <input type="text" id="search-input" class="search-input" placeholder="搜索会议..." aria-label="搜索会议">
+          <i class="fas fa-search search-icon"></i>
+        </div>
+        <div class="year-filter">
+          <select id="year-select" class="year-select" aria-label="按年份筛选">
+            <option value="all">所有年份</option>
+            <!-- 年份选项将由JavaScript动态生成 -->
+          </select>
+          <i class="fas fa-chevron-down year-icon"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 会议列表 -->
+  <section class="conference-list">
+    <div class="container">
+      <div id="conferences-container" class="conference-grid">
+        <div class="loading">
+          <div class="loading-spinner"></div>
+        </div>
+      </div>
+      
+      <!-- 分页控件 -->
+      <div id="pagination" class="pagination"></div>
+    </div>
+  </section>
+  
+  <!-- 页脚 -->
+  <div id="footer-container"></div>
+  
+  <!-- 脚本 -->
+  <script src="/components/Navbar.js"></script>
+  <script src="/components/Footer.js"></script>
+  <script src="/components/Api.js"></script>
+  <script src="/components/Markdown.js"></script>
+  <script src="/js/conferences.js"></script>
+</body>
+</html> 

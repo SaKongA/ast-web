@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>国际合作 - 亚洲科学技术研究院</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="/styles/global.css">
+  <link rel="stylesheet" href="/styles/index.css">
+  <style>
+    /* 国际合作页面特定样式 */
+    .page-header {
+      background-color: var(--background-darker);
+      padding: 120px 0 60px;
+      text-align: center;
+    }
+    
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+    
+    .page-description {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-secondary);
+    }
+    
+    .world-map-section {
+      padding: 80px 0;
+    }
+    
+    .world-map-container {
+      position: relative;
+      height: 500px;
+      background-color: var(--background-card);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 50px;
+    }
+    
+    .world-map {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/images/world-map.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.3;
+    }
+    
+    .map-intro {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .map-intro p {
+      color: var(--text-secondary);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .collaboration-section {
+      padding: 80px 0;
+      background-color: var(--background-darker);
+    }
+    
+    .collaboration-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .collaboration-item {
+      background-color: var(--background-card);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+    
+    .collaboration-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .collaboration-image {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .collaboration-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .collaboration-item:hover .collaboration-image img {
+      transform: scale(1.05);
+    }
+    
+    .collaboration-content {
+      padding: 25px;
+    }
+    
+    .collaboration-title {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    
+    .collaboration-location {
+      display: flex;
+      align-items: center;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+    
+    .collaboration-location i {
+      margin-right: 5px;
+    }
+    
+    .collaboration-description {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    
+    .partners-section {
+      padding: 80px 0;
+    }
+    
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .partner-item {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--background-card);
+      border-radius: 8px;
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+    
+    .partner-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .partner-item img {
+      max-width: 100%;
+      max-height: 70px;
+      filter: grayscale(100%) brightness(1.5);
+      transition: filter 0.3s ease;
+    }
+    
+    .partner-item:hover img {
+      filter: grayscale(0) brightness(1);
+    }
+    
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 100px 0 40px;
+      }
+      
+      .page-title {
+        font-size: 2rem;
+      }
+      
+      .world-map-container {
+        height: 300px;
+      }
+      
+      .collaboration-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <div id="navbar-container"></div>
+  
+  <!-- 页面头部 -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title">国际合作</h1>
+      <p class="page-description">亚洲科学技术研究院与世界各地科研机构的学术交流与合作项目</p>
+    </div>
+  </header>
+  
+  <!-- 世界地图 -->
+  <section class="world-map-section">
+    <div class="container">
+      <div class="module-building">
+        <div class="building-icon">
+          <i class="fas fa-globe-asia"></i>
+        </div>
+        <h3>模块建设中...</h3>
+        <p>我们正在完善国际合作地图相关内容，敬请期待！</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 合作项目 -->
+  <section class="collaboration-section">
+    <div class="container">
+      <h2 class="section-title">合作项目</h2>
+      <div class="module-building">
+        <div class="building-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h3>模块建设中...</h3>
+        <p>我们正在完善国际合作相关内容，敬请期待！</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 合作伙伴 -->
+  <section class="partners-section">
+    <div class="container">
+      <h2 class="section-title">合作伙伴</h2>
+      <div class="module-building">
+        <div class="building-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <h3>模块建设中...</h3>
+        <p>我们正在整理研究院的全球合作伙伴信息，敬请期待！</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 页脚 -->
+  <div id="footer-container"></div>
+  
+  <!-- 脚本 -->
+  <script src="/components/Navbar.js"></script>
+  <script src="/components/Footer.js"></script>
+  <script src="/components/Api.js"></script>
+  <script>
+    // 初始化导航栏和页脚
+    document.getElementById('navbar-container').innerHTML = renderNavbar();
+    document.getElementById('footer-container').innerHTML = renderFooter();
+  </script>
+</body>
+</html> 
