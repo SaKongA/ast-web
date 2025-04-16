@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const https = require('https');
+const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 443;
 
 // 使用静态文件中间件
 app.use(express.static(path.join(__dirname, '/')));
@@ -44,7 +46,20 @@ app.get('*', (req, res) => {
   });
 });
 
-// 启动服务器
-app.listen(PORT, () => {
-  console.log(`服务器已启动，运行在 http://localhost:${PORT}`);
-}); 
+// SSL证书配置
+const options = {
+  key: fs.readFileSync('cert/web.lostzone.cn.key'),
+  cert: fs.readFileSync('cert/web.lostzone.cn.pem')
+};
+
+// 创建HTTPS服务器
+https.createServer(options, app).listen(443, () => {
+  console.log('HTTPS服务器运行在端口443');
+});
+
+// 可选：HTTP重定向到HTTPS
+const http = require('http');
+http.createServer((req, res) => {
+  res.writeHead(301, { Location: 'https://' + req.headers.host + req.url });
+  res.end();
+}).listen(80); 
