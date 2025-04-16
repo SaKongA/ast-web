@@ -20,7 +20,7 @@ app.use('/marked', express.static(path.join(__dirname, 'node_modules', 'marked',
 
 // API代理中间件，转发所有/api请求到Strapi后端
 const apiProxy = createProxyMiddleware('/api', {
-  target: 'http://localhost:1337', // Strapi默认端口，根据实际部署环境修改
+  target: 'https://console.lostzone.cn:1336', // Strapi默认端口，根据实际部署环境修改
   changeOrigin: true,
   pathRewrite: {
     '^/api': '/api', // 不需要重写路径
