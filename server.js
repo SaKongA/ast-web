@@ -49,7 +49,9 @@ app.get('*', (req, res) => {
 // SSL证书配置
 const options = {
   key: fs.readFileSync('cert/web.lostzone.cn.key'),
-  cert: fs.readFileSync('cert/web.lostzone.cn.pem')
+  cert: fs.readFileSync('cert/web.lostzone.cn.pem'),
+  // 添加服务器名称配置，解决SSL名称不匹配问题
+  ServerName: 'web.lostzone.cn'
 };
 
 // 创建HTTPS服务器
