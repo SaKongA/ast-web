@@ -1,12 +1,16 @@
-import { defineConfig } from 'vite';
-
-export default defineConfig({
-  server: {
-    allowedHosts: ['console.lostzone.cn']
-  },
-  resolve: {
-    alias: {
-      '@': '/src',
+export default (config) => {
+  return {
+    ...config,
+    server: {
+      ...config.server,
+      allowedHosts: ['console.lostzone.cn'],
     },
-  },
-}); 
+    resolve: {
+      ...config.resolve,
+      alias: {
+        ...(config.resolve?.alias || {}),
+        '@': '/src',
+      },
+    },
+  };
+}; 
