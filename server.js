@@ -50,8 +50,17 @@ app.get('*', (req, res) => {
 const options = {
   key: fs.readFileSync('cert/web.lostzone.cn.key'),
   cert: fs.readFileSync('cert/web.lostzone.cn.pem'),
-  // 添加服务器名称配置，解决SSL名称不匹配问题
-  ServerName: 'web.lostzone.cn'
+  // 启用SNI支持
+  SNICallback: (servername, cb) => {
+    if (servername === 'web.lostzone.cn' || servername === 'www.web.lostzone.cn') {
+      cb(null, require('tls').createSecureContext({
+        key: fs.readFileSync('cert/web.lostzone.cn.key'),
+        cert: fs.readFileSync('cert/web.lostzone.cn.pem')
+      }));
+    } else {
+      cb(new Error('未找到匹配的证书'));
+    }
+  }
 };
 
 // 创建HTTPS服务器
