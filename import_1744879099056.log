@@ -1,0 +1,19 @@
+[2025-04-17 16:38:19.059] warn: (Schema Integrity) api::conference.conference.attributes.date.type has a different data type
+[2025-04-17 16:38:19.060] warn: (Schema Integrity) api::conference.conference.attributes.summary.type has a different data type
+[2025-04-17 16:38:19.061] warn: (Schema Integrity) api::conference.conference.info.description does not exist on destination
+[2025-04-17 16:38:19.061] warn: (Schema Integrity) api::international-collaboration.international-collaboration.attributes.PartnerInstitute.component has a different data type
+[2025-04-17 16:38:19.062] warn: (Schema Integrity) api::international-collaboration.international-collaboration.attributes.PartnerScholar.repeatable has a different data type
+[2025-04-17 16:38:19.062] warn: (Schema Integrity) api::international-collaboration.international-collaboration.attributes.PartnerScholar.component has a different data type
+[2025-04-17 16:38:19.062] warn: (Schema Integrity) api::international-collaboration.international-collaboration.attributes.PartnerScholar.displayName does not exist on destination
+[2025-04-17 16:38:19.063] warn: (Schema Integrity) api::international-collaboration.international-collaboration.info.description does not exist on source
+[2025-04-17 16:38:19.063] warn: (Schema Integrity) api::research.research.collectionName has a different data type
+[2025-04-17 16:38:19.063] warn: (Schema Integrity) api::research.research.info.pluralName has a different data type
+[2025-04-17 16:38:19.063] warn: (Schema Integrity) api::research.research.attributes.date.type has a different data type
+[2025-04-17 16:38:19.063] warn: (Schema Integrity) api::research.research.attributes.summary.type has a different data type
+[2025-04-17 16:38:19.064] warn: (Schema Integrity) api::research.research.attributes.localizations.joinColumn.referencedTable has a different data type
+[2025-04-17 16:38:19.064] warn: (Schema Integrity) api::research.research.info.description does not exist on destination
+[2025-04-17 16:38:19.064] warn: (Schema Integrity) international-collaboration.partner-scholar does not exist on destination
+[2025-04-17 16:38:19.064] warn: (Schema Integrity) international-collaboration.partner-institute does not exist on destination
+[2025-04-17 16:38:19.064] warn: (Schema Integrity) partner-scholar.partner-scholar does not exist on source
+[2025-04-17 16:38:19.064] warn: (Schema Integrity) partner-institute.partner-institute does not exist on source
+[2025-04-17 16:38:34.142] error: [FATAL] Unresolved differences in schema

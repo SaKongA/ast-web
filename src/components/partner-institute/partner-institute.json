@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_partner_institute_partner_institutes",
+  "info": {
+    "displayName": "PartnerInstitute",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "collaborationDate": {
+      "type": "date"
+    },
+    "description": {
+      "type": "text"
+    },
+    "logo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contacts",
+  "info": {
+    "singularName": "contact",
+    "pluralName": "contacts",
+    "displayName": "Contact"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "institutionName": {
+      "type": "string"
+    },
+    "workingHours": {
+      "type": "string"
+    },
+    "phoneNumbers": {
+      "type": "string"
+    },
+    "emails": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    }
+  }
+}
