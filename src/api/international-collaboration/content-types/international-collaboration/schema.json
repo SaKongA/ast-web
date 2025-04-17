@@ -4,7 +4,8 @@
   "info": {
     "singularName": "international-collaboration",
     "pluralName": "international-collaborations",
-    "displayName": "International Collaboration"
+    "displayName": "International Collaboration",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,13 +15,12 @@
       "displayName": "PartnerInstitute",
       "type": "component",
       "repeatable": false,
-      "component": "international-collaboration.partner-institute"
+      "component": "partner-institute.partner-institute"
     },
     "PartnerScholar": {
-      "displayName": "PartnerScholar",
       "type": "component",
-      "repeatable": false,
-      "component": "international-collaboration.partner-scholar"
+      "repeatable": true,
+      "component": "partner-scholar.partner-scholar"
     }
   }
 }

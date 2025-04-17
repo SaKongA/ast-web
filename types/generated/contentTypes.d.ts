@@ -402,7 +402,6 @@ export interface ApiAboutAbout extends Struct.CollectionTypeSchema {
 export interface ApiConferenceConference extends Struct.CollectionTypeSchema {
   collectionName: 'conferences';
   info: {
-    description: '';
     displayName: 'Conference';
     pluralName: 'conferences';
     singularName: 'conference';
@@ -419,7 +418,7 @@ export interface ApiConferenceConference extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    date: Schema.Attribute.DateTime;
+    date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -427,7 +426,7 @@ export interface ApiConferenceConference extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    summary: Schema.Attribute.String;
+    summary: Schema.Attribute.Text;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -471,6 +470,7 @@ export interface ApiInternationalCollaborationInternationalCollaboration
   extends Struct.CollectionTypeSchema {
   collectionName: 'international_collaborations';
   info: {
+    description: '';
     displayName: 'International Collaboration';
     pluralName: 'international-collaborations';
     singularName: 'international-collaboration';
@@ -489,12 +489,12 @@ export interface ApiInternationalCollaborationInternationalCollaboration
     > &
       Schema.Attribute.Private;
     PartnerInstitute: Schema.Attribute.Component<
-      'international-collaboration.partner-institute',
+      'partner-institute.partner-institute',
       false
     >;
     PartnerScholar: Schema.Attribute.Component<
-      'international-collaboration.partner-scholar',
-      false
+      'partner-scholar.partner-scholar',
+      true
     >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -504,11 +504,10 @@ export interface ApiInternationalCollaborationInternationalCollaboration
 }
 
 export interface ApiResearchResearch extends Struct.CollectionTypeSchema {
-  collectionName: 'researchs';
+  collectionName: 'researches';
   info: {
-    description: '';
     displayName: 'Research';
-    pluralName: 'researchs';
+    pluralName: 'researches';
     singularName: 'research';
   };
   options: {
@@ -523,7 +522,7 @@ export interface ApiResearchResearch extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    date: Schema.Attribute.DateTime;
+    date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -531,7 +530,7 @@ export interface ApiResearchResearch extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    summary: Schema.Attribute.String;
+    summary: Schema.Attribute.Text;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

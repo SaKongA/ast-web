@@ -1,9 +1,10 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface InternationalCollaborationPartnerInstitute
+export interface PartnerInstitutePartnerInstitute
   extends Struct.ComponentSchema {
-  collectionName: 'components_international_collaboration_partner_institutes';
+  collectionName: 'components_partner_institute_partner_institutes';
   info: {
+    description: '';
     displayName: 'PartnerInstitute';
   };
   attributes: {
@@ -14,10 +15,10 @@ export interface InternationalCollaborationPartnerInstitute
   };
 }
 
-export interface InternationalCollaborationPartnerScholar
-  extends Struct.ComponentSchema {
-  collectionName: 'components_international_collaboration_partner_scholars';
+export interface PartnerScholarPartnerScholar extends Struct.ComponentSchema {
+  collectionName: 'components_partner_scholar_partner_scholars';
   info: {
+    description: '';
     displayName: 'PartnerScholar';
   };
   attributes: {
@@ -31,8 +32,8 @@ export interface InternationalCollaborationPartnerScholar
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'international-collaboration.partner-institute': InternationalCollaborationPartnerInstitute;
-      'international-collaboration.partner-scholar': InternationalCollaborationPartnerScholar;
+      'partner-institute.partner-institute': PartnerInstitutePartnerInstitute;
+      'partner-scholar.partner-scholar': PartnerScholarPartnerScholar;
     }
   }
 }

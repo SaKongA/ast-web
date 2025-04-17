@@ -14,16 +14,16 @@
     "introduction": {
       "type": "text"
     },
-    "leadership": {
-      "type": "text"
-    },
     "academicCommittee": {
       "type": "text"
     },
-    "facultyAndResearchers": {
+    "visitingProfessors": {
       "type": "text"
     },
-    "visitingProfessors": {
+    "leadership": {
+      "type": "text"
+    },
+    "facultyAndResearchers": {
       "type": "text"
     }
   }

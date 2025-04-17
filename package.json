@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "ast-web-backend",
   "version": "0.1.0",
   "private": true,
   "description": "A Strapi application",
@@ -15,40 +15,21 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "5.12.4",
-    "@strapi/plugin-users-permissions": "5.12.4",
-    "@strapi/strapi": "5.12.4",
+    "@strapi/plugin-cloud": "5.12.5",
+    "@strapi/plugin-users-permissions": "5.12.5",
+    "@strapi/strapi": "5.12.5",
     "better-sqlite3": "11.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
     "styled-components": "^6.0.0"
   },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "typescript": "^5"
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"
   },
   "strapi": {
-    "uuid": "8f291a77-eba8-495b-b772-039638db17e5"
-  },
-  "bin": "server.js",
-  "pkg": {
-    "targets": ["node14-win-x64","node14-linux-x64"],
-    "outputPath": "dist",
-    "assets": [
-      "components/**/*",
-      "js/**/*",
-      "pages/**/*",
-      "videos/**/*",
-      "public/**/*",
-      "styles/**/*",
-      "images/**/*"
-    ]
+    "uuid": "f7ffd314-56ba-4065-ac8a-0b9b9610d5fd"
   }
 }

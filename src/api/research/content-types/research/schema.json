@@ -1,11 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "researchs",
+  "collectionName": "researches",
   "info": {
     "singularName": "research",
-    "pluralName": "researchs",
-    "displayName": "Research",
-    "description": ""
+    "pluralName": "researches",
+    "displayName": "Research"
   },
   "options": {
     "draftAndPublish": true
@@ -18,21 +17,20 @@
       "type": "string"
     },
     "date": {
-      "type": "datetime"
+      "type": "date"
     },
     "summary": {
-      "type": "string"
+      "type": "text"
     },
     "coverImage": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "type": "media",
+      "multiple": false
     },
     "content": {
       "type": "richtext"

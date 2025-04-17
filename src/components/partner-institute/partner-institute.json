@@ -1,7 +1,8 @@
 {
-  "collectionName": "components_international_collaboration_partner_institutes",
+  "collectionName": "components_partner_institute_partner_institutes",
   "info": {
-    "displayName": "PartnerInstitute"
+    "displayName": "PartnerInstitute",
+    "description": ""
   },
   "options": {},
   "attributes": {

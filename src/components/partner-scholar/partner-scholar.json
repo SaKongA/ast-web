@@ -1,7 +1,8 @@
 {
-  "collectionName": "components_international_collaboration_partner_scholars",
+  "collectionName": "components_partner_scholar_partner_scholars",
   "info": {
-    "displayName": "PartnerScholar"
+    "displayName": "PartnerScholar",
+    "description": ""
   },
   "options": {},
   "attributes": {
