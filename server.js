@@ -1,11 +1,9 @@
 const express = require('express');
 const path = require('path');
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const https = require('https');
-const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 443;
+const PORT = process.env.PORT || 8080;
 
 // 使用静态文件中间件
 app.use(express.static(path.join(__dirname, '/')));
@@ -22,7 +20,8 @@ app.use('/marked', express.static(path.join(__dirname, 'node_modules', 'marked',
 
 // API代理中间件，转发所有/api请求到Strapi后端
 const apiProxy = createProxyMiddleware('/api', {
-  target: 'https://console.lostzone.cn:1336', // Strapi默认端口，根据实际部署环境修改
+  // target: 'http://luck.awacode.top:6753', // Strapi默认端口，根据实际部署环境修改
+  target: 'http://localhost:1337', // Strapi默认端口，根据实际部署环境修改
   changeOrigin: true,
   pathRewrite: {
     '^/api': '/api', // 不需要重写路径
@@ -46,31 +45,7 @@ app.get('*', (req, res) => {
   });
 });
 
-// SSL证书配置
-const options = {
-  key: fs.readFileSync('cert/web.lostzone.cn.key'),
-  cert: fs.readFileSync('cert/web.lostzone.cn.pem'),
-  // 启用SNI支持
-  SNICallback: (servername, cb) => {
-    if (servername === 'web.lostzone.cn' || servername === 'www.web.lostzone.cn') {
-      cb(null, require('tls').createSecureContext({
-        key: fs.readFileSync('cert/web.lostzone.cn.key'),
-        cert: fs.readFileSync('cert/web.lostzone.cn.pem')
-      }));
-    } else {
-      cb(new Error('未找到匹配的证书'));
-    }
-  }
-};
-
-// 创建HTTPS服务器
-https.createServer(options, app).listen(443, () => {
-  console.log('HTTPS服务器运行在端口443');
-});
-
-// 可选：HTTP重定向到HTTPS
-const http = require('http');
-http.createServer((req, res) => {
-  res.writeHead(301, { Location: 'https://' + req.headers.host + req.url });
-  res.end();
-}).listen(80); 
+// 启动服务器
+app.listen(PORT, () => {
+  console.log(`服务器已启动，运行在 http://localhost:${PORT}`);
+}); 

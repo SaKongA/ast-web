@@ -38,15 +38,15 @@ async function loadResearchDetails() {
     
     // 如果单个科研成果API不可用，回退到获取所有科研成果
     if (!research) {
-      const researchsData = await API.fetchResearch();
+      const researchesData = await API.fetchResearch();
       
-      if (!researchsData || !researchsData.data || researchsData.data.length === 0) {
+      if (!researchesData || !researchesData.data || researchesData.data.length === 0) {
         showError('获取科研成果数据失败');
         return;
       }
       
       // 查找指定ID的科研成果
-      research = researchsData.data.find(r => r.id === parseInt(researchId));
+      research = researchesData.data.find(r => r.id === parseInt(researchId));
     }
     
     if (!research) {
@@ -63,22 +63,70 @@ async function loadResearchDetails() {
   }
 }
 
+// 添加关键字处理函数
+function processKeywords(research) {
+  let keywordsHTML = '';
+  
+  // 处理关键字
+  if (research.keywords) {
+    // 如果keywords是数组
+    if (Array.isArray(research.keywords)) {
+      return research.keywords.map(keyword => 
+        `<span class="keyword-tag">${keyword.trim()}</span>`
+      ).join('');
+    } 
+    // 如果keywords是字符串，按分号分割
+    else if (typeof research.keywords === 'string') {
+      const keywordArray = research.keywords.split(';').map(k => k.trim()).filter(k => k);
+      return keywordArray.map(keyword => 
+        `<span class="keyword-tag">${keyword}</span>`
+      ).join('');
+    }
+  } else {
+    // 尝试从摘要或内容中提取关键字
+    const keywordMatch = (research.summary || research.content || '').match(/Keywords:?\s*([^\.]+)\.?/i);
+    if (keywordMatch && keywordMatch[1]) {
+      const keywordArray = keywordMatch[1].split(';').map(k => k.trim()).filter(k => k);
+      return keywordArray.map(keyword => 
+        `<span class="keyword-tag">${keyword}</span>`
+      ).join('');
+    }
+  }
+  
+  return keywordsHTML;
+}
+
 // 渲染科研成果详情
 function renderResearchDetails(research) {
   const researchContainer = document.getElementById('research-container');
-  const formattedDate = research.date ? API.formatDate(research.date) : API.formatDate(research.createdAt);
+  const formattedDate = API.formatDate(research.date || research.createdAt);
   
-  // 使用API的formatContent方法处理内容
-  const formattedContent = API.formatContent(research.content);
+  // 处理关键字
+  const keywordsHTML = processKeywords(research);
+  
+  // 处理内容
+  let formattedContent = '';
+  if (research.content) {
+    // 检查是否为Markdown
+    if (research.isMarkdown) {
+      formattedContent = MarkdownParser.parse(research.content);
+    } else {
+      formattedContent = API.formatContent(research.content);
+    }
+  }
   
   const detailsHTML = `
     <div class="research-container">
       <div class="research-header">
-        <h2 class="research-title">${research.title}</h2>
+        <h1 class="research-title">${research.title}</h1>
         <div class="research-meta">
           <div class="meta-item">
             <i class="far fa-user"></i>
             <span>${research.author || '未知作者'}</span>
+          </div>
+          <div class="meta-item">
+            <i class="far fa-calendar-alt"></i>
+            <span>${formattedDate}</span>
           </div>
           <div class="meta-item">
             <i class="far fa-clock"></i>
@@ -93,9 +141,16 @@ function renderResearchDetails(research) {
         <div class="research-content">
           ${formattedContent}
         </div>
+        ${keywordsHTML ? `
+        <div class="keywords-section">
+          <div class="keywords-container">
+            <span class="keywords-label">关键字:</span>
+            ${keywordsHTML}
+          </div>
+        </div>` : ''}
         <div class="action-buttons">
           <a href="/pages/research.html" class="btn btn-back">
-            <i class="fas fa-arrow-left"></i> 返回科研成果列表
+            <i class="fas fa-arrow-left"></i> 返回研究列表
           </a>
           <button class="btn btn-share" onclick="shareResearch()">
             <i class="fas fa-share-alt"></i> 分享

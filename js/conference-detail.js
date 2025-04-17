@@ -71,6 +71,19 @@ function renderConferenceDetails(conference) {
   // 处理内容段落 - 对会议详情页使用传统的非Markdown格式
   const formattedContent = API.formatContent(conference.content, true); // 第二个参数为true，强制使用传统格式
   
+  // 处理封面图片
+  let coverImageHtml = '';
+  if (conference.coverImage && conference.coverImage.url) {
+    const imageUrl = conference.coverImage.url.startsWith('http') 
+      ? conference.coverImage.url 
+      : `http://localhost:1337${conference.coverImage.url}`;
+    coverImageHtml = `
+      <div class="conference-cover-image">
+        <img src="${imageUrl}" alt="${conference.title}" />
+      </div>
+    `;
+  }
+  
   const detailsHTML = `
     <div class="conference-container">
       <div class="conference-header">
@@ -92,6 +105,7 @@ function renderConferenceDetails(conference) {
         <div class="conference-summary">
           ${conference.summary || ''}
         </div>
+        ${coverImageHtml}
       </div>
       <div class="conference-body">
         <div class="conference-content">

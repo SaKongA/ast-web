@@ -4,12 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>科研成果详情 - 亚洲科学技术研究院</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link href="/lib/fonts/google-fonts.css" rel="stylesheet">
+  <link rel="stylesheet" href="/lib/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="/styles/global.css">
   <link rel="stylesheet" href="/styles/research-detail.css">
   <!-- 添加代码高亮样式 -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css">
+  <link rel="stylesheet" href="/lib/highlight/atom-one-dark.min.css">
+  <style>
+    /* 关键字标签样式 */
+    .keywords-section {
+      margin: 30px 0;
+      padding-top: 20px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+    
+    .keywords-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .keywords-label {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .keyword-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      background-color: rgba(30, 136, 229, 0.15);
+      border: 1px solid rgba(30, 136, 229, 0.3);
+      border-radius: 20px;
+      color: var(--primary-color);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      height: 32px;
+    }
+    
+    .keyword-tag:hover {
+      background-color: rgba(30, 136, 229, 0.25);
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body>
   <!-- 导航栏 -->
@@ -43,11 +86,10 @@
   <script src="/components/Api.js"></script>
   <script src="/components/Markdown.js"></script>
   <!-- marked库 -->
-  <script src="https://cdn.jsdelivr.net/npm/marked@5.1.2/lib/marked.min.js"></script>
   <!-- 代码高亮库 -->
-  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/core.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/languages/javascript.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/languages/json.min.js"></script>
+  <script src="/lib/highlight/core.min.js"></script>
+  <script src="/lib/highlight/javascript.min.js"></script>
+  <script src="/lib/highlight/javascript.min.js"></script>
   <script src="/js/research-detail.js"></script>
 </body>
 </html> 

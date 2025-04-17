@@ -20,7 +20,7 @@ async function fetchAbout() {
 // 获取会议信息
 async function fetchConferences() {
   try {
-    const response = await fetch(`${API_BASE_URL}/conferences`);
+    const response = await fetch(`${API_BASE_URL}/conferences?populate=coverImage`);
     if (!response.ok) throw new Error('获取会议数据失败');
     return await response.json();
   } catch (error) {
@@ -32,7 +32,7 @@ async function fetchConferences() {
 // 获取单个会议详情
 async function fetchConferenceById(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/conferences/${id}`);
+    const response = await fetch(`${API_BASE_URL}/conferences/${id}?populate=coverImage`);
     if (!response.ok) throw new Error('获取会议详情失败');
     return await response.json();
   } catch (error) {
@@ -61,7 +61,7 @@ function fetchContact() {
 // 获取科研成果
 async function fetchResearch() {
   try {
-    const response = await fetch(`${API_BASE_URL}/researchs`);
+    const response = await fetch(`${API_BASE_URL}/researches`);
     if (!response.ok) throw new Error('获取科研成果数据失败');
     return await response.json();
   } catch (error) {
@@ -73,7 +73,7 @@ async function fetchResearch() {
 // 获取单个科研成果详情
 async function fetchResearchById(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/researchs/${id}`);
+    const response = await fetch(`${API_BASE_URL}/researches/${id}`);
     if (!response.ok) throw new Error('获取科研成果详情失败');
     return await response.json();
   } catch (error) {

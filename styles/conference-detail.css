@@ -263,4 +263,20 @@
   margin-top: 30px;
   margin-bottom: 15px;
   text-indent: 0; /* 确保标题不缩进 */
+}
+
+/* 会议封面图样式 */
+.conference-cover-image {
+  margin-top: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.conference-cover-image img {
+  width: 100%;
+  max-width: 800px;
+  display: block;
+  margin: 0 auto;
+  object-fit: cover;
 } 

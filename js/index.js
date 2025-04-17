@@ -17,9 +17,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   
   // 添加导航栏滚动效果
   initNavbarScroll();
-  
-  // 初始化科研亮点轮播
-  initHighlightsSlider();
 });
 
 /**
@@ -201,73 +198,4 @@ async function loadNewsData() {
       newsContainer.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-tertiary);">加载数据失败，请稍后再试</p>';
     }
   }
-}
-
-/**
- * 初始化科研亮点轮播
- */
-function initHighlightsSlider() {
-  const highlights = document.querySelectorAll('.highlight-item');
-  const dotsContainer = document.querySelector('.highlight-dots');
-  const prevButton = document.querySelector('.highlight-prev');
-  const nextButton = document.querySelector('.highlight-next');
-  
-  if (!highlights.length) return;
-  
-  let currentIndex = 0;
-  let intervalId;
-  
-  // 创建指示点
-  highlights.forEach((_, index) => {
-    const dot = document.createElement('span');
-    dot.classList.add('highlight-dot');
-    if (index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => {
-      showHighlight(index);
-      resetAutoSlide();
-    });
-    dotsContainer.appendChild(dot);
-  });
-  
-  // 显示第一个亮点
-  highlights[0].classList.add('active');
-  
-  // 上一个按钮点击事件
-  prevButton.addEventListener('click', () => {
-    showHighlight(currentIndex - 1 < 0 ? highlights.length - 1 : currentIndex - 1);
-    resetAutoSlide();
-  });
-  
-  // 下一个按钮点击事件
-  nextButton.addEventListener('click', () => {
-    showHighlight(currentIndex + 1 >= highlights.length ? 0 : currentIndex + 1);
-    resetAutoSlide();
-  });
-  
-  // 显示指定索引的亮点
-  function showHighlight(index) {
-    highlights.forEach(item => item.classList.remove('active'));
-    const dots = document.querySelectorAll('.highlight-dot');
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    highlights[index].classList.add('active');
-    dots[index].classList.add('active');
-    currentIndex = index;
-  }
-  
-  // 自动轮播
-  function startAutoSlide() {
-    intervalId = setInterval(() => {
-      showHighlight(currentIndex + 1 >= highlights.length ? 0 : currentIndex + 1);
-    }, 5000);
-  }
-  
-  // 重置自动轮播
-  function resetAutoSlide() {
-    clearInterval(intervalId);
-    startAutoSlide();
-  }
-  
-  // 开始自动轮播
-  startAutoSlide();
 } 

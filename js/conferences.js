@@ -127,21 +127,44 @@ function renderConferences() {
   currentPageConferences.forEach(conference => {
     const formattedDate = API.formatDate(conference.date || conference.createdAt);
     
+    // 处理封面图片
+    let coverImageHtml = '';
+    if (conference.coverImage && conference.coverImage.url) {
+      const imageUrl = conference.coverImage.url.startsWith('http') 
+        ? conference.coverImage.url 
+        : `http://localhost:1337${conference.coverImage.url}`;
+      coverImageHtml = `
+        <div class="conference-cover">
+          <img src="${imageUrl}" alt="${conference.title}" />
+        </div>
+      `;
+    } else {
+      // 默认封面图
+      coverImageHtml = `
+        <div class="conference-cover">
+          <img src="/images/asian-institute-logo.png" alt="默认会议封面" />
+        </div>
+      `;
+    }
+    
     const conferenceElement = document.createElement('div');
     conferenceElement.className = 'conference-item';
     conferenceElement.innerHTML = `
-      <div class="conference-header">
-        <h2 class="conference-title">${conference.title}</h2>
-        <div class="conference-meta">
-          <p class="conference-author"><i class="far fa-user"></i> ${conference.author || '未知作者'}</p>
-          <p class="conference-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</p>
+      ${coverImageHtml}
+      <div class="conference-info">
+        <div class="conference-header">
+          <h2 class="conference-title">${conference.title}</h2>
+          <div class="conference-meta">
+            <p class="conference-author"><i class="far fa-user"></i> ${conference.author || '未知作者'}</p>
+            <p class="conference-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</p>
+          </div>
         </div>
-      </div>
-      <div class="conference-body">
-        <p class="conference-summary">${conference.summary || ''}</p>
-        <a href="/pages/conference-detail.html?id=${conference.id}" class="btn-detail">
-          查看详情 <i class="fas fa-arrow-right"></i>
-        </a>
+        <div class="conference-body">
+          <p class="conference-summary">${conference.summary || ''}</p>
+          <a href="/pages/conference-detail.html?id=${conference.id}" class="btn-detail">
+            查看详情 <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
       </div>
     `;
     

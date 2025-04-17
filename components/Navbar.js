@@ -32,7 +32,7 @@ function renderNavbar() {
     <nav class="navbar">
       <div class="navbar-container">
         <div class="navbar-logo">
-          <img src="/images/logo.png" alt="亚洲科学技术研究院">
+          <img src="/images/logo.png" alt="亚洲科学技术研究院" style="width: 40px; height: 40px; border-radius: 4px;">
           <h1 style="color: var(--text-primary);">亚洲科学技术研究院</h1>
         </div>
         <ul class="navbar-menu">

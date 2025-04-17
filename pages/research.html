@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>科研成果 - 亚洲科学技术研究院</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link href="/lib/fonts/google-fonts.css" rel="stylesheet">
+  <link rel="stylesheet" href="/lib/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="/styles/global.css">
   <style>
     /* 科研成果页面特定样式 */
@@ -154,12 +155,14 @@
     
     .research-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      grid-template-columns: 1fr;
       gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     
     .research-item {
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       background-color: var(--background-card);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -176,22 +179,24 @@
     }
     
     .research-header {
-      padding: 25px;
+      padding: 30px 35px;
       border-bottom: 1px solid var(--border-color);
       background-color: rgba(255, 255, 255, 0.03);
+      position: relative;
     }
     
     .research-title {
-      font-size: 1.4rem;
+      font-size: 1.7rem;
       margin-bottom: 15px;
       line-height: 1.4;
+      color: var(--text-primary);
     }
     
     .research-meta {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 15px;
     }
     
     .research-author, 
@@ -204,46 +209,94 @@
     
     .research-author i,
     .research-date i {
-      margin-right: 6px;
+      margin-right: 8px;
       color: var(--primary-color);
     }
     
     .research-body {
-      padding: 25px;
+      padding: 30px 35px;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
+      background: linear-gradient(to bottom, var(--background-card), var(--background-dark));
     }
     
     .research-summary {
-      font-weight: 500;
+      font-weight: 400;
       margin-bottom: 20px;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.8;
       font-size: 1rem;
       flex-grow: 1;
+      text-indent: 2em;
+    }
+    
+    .research-keywords {
+      margin: 20px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 15px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      align-items: center;
+    }
+    
+    .keyword-label {
+      color: var(--text-secondary);
+      margin-right: 10px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .keyword-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 12px;
+      background-color: rgba(30, 136, 229, 0.15);
+      border: 1px solid rgba(30, 136, 229, 0.3);
+      border-radius: 20px;
+      color: var(--primary-color);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      height: 28px;
+    }
+    
+    .keyword-tag:hover {
+      background-color: rgba(30, 136, 229, 0.25);
+      transform: translateY(-2px);
     }
     
     .btn-detail {
       margin-top: 20px;
-      display: block;
+      display: inline-block;
       text-align: center;
       background-color: var(--primary-color);
       color: white;
-      padding: 12px 20px;
+      padding: 12px 25px;
       border-radius: 5px;
       font-weight: 500;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
+      align-self: flex-start;
+      position: relative;
+      overflow: hidden;
     }
     
     .btn-detail:hover {
-      background-color: #1565c0;
+      background-color: #1976d2;
       color: white;
       text-decoration: none;
+      box-shadow: 0 5px 15px rgba(25, 118, 210, 0.3);
     }
     
     .btn-detail i {
       margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+    
+    .btn-detail:hover i {
+      transform: translateX(3px);
     }
     
     .no-research {
@@ -317,15 +370,24 @@
       }
       
       .research-list {
-        padding: 40px 0;
+        padding: 40px 20px;
       }
       
       .research-grid {
         grid-template-columns: 1fr;
+        max-width: 100%;
       }
       
       .categories-container {
         margin-top: 0;
+      }
+      
+      .research-title {
+        font-size: 1.5rem;
+      }
+      
+      .btn-detail {
+        width: 100%;
       }
     }
   </style>
@@ -471,7 +533,12 @@
           research.title.toLowerCase().includes(searchTerm) ||
           (research.summary && research.summary.toLowerCase().includes(searchTerm)) ||
           (research.content && research.content.toLowerCase().includes(searchTerm)) ||
-          (research.author && research.author.toLowerCase().includes(searchTerm));
+          (research.author && research.author.toLowerCase().includes(searchTerm)) ||
+          // 通过关键字搜索
+          (research.keywords && Array.isArray(research.keywords) && 
+            research.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm))) ||
+          (research.keywords && typeof research.keywords === 'string' && 
+            research.keywords.toLowerCase().includes(searchTerm));
         
         // 分类过滤
         const matchesCategory = selectedCategory === 'all' || 
@@ -504,6 +571,33 @@
       currentPageResearch.forEach(research => {
         const formattedDate = research.date ? API.formatDate(research.date) : API.formatDate(research.createdAt);
         
+        // 处理关键字
+        let keywordsHTML = '';
+        if (research.keywords) {
+          // 如果keywords是数组
+          if (Array.isArray(research.keywords)) {
+            keywordsHTML = research.keywords.map(keyword => 
+              `<span class="keyword-tag">${keyword.trim()}</span>`
+            ).join('');
+          } 
+          // 如果keywords是字符串，按分号分割
+          else if (typeof research.keywords === 'string') {
+            const keywordArray = research.keywords.split(';').map(k => k.trim()).filter(k => k);
+            keywordsHTML = keywordArray.map(keyword => 
+              `<span class="keyword-tag">${keyword}</span>`
+            ).join('');
+          }
+        } else {
+          // 尝试从摘要或内容中提取关键字
+          const keywordMatch = (research.summary || research.content || '').match(/Keywords:?\s*([^\.]+)\.?/i);
+          if (keywordMatch && keywordMatch[1]) {
+            const keywordArray = keywordMatch[1].split(';').map(k => k.trim()).filter(k => k);
+            keywordsHTML = keywordArray.map(keyword => 
+              `<span class="keyword-tag">${keyword}</span>`
+            ).join('');
+          }
+        }
+        
         const researchElement = document.createElement('div');
         researchElement.className = 'research-item';
         researchElement.innerHTML = `
@@ -515,7 +609,12 @@
             </div>
           </div>
           <div class="research-body">
-            <p class="research-summary">${research.summary || ''}</p>
+            <div class="research-summary">${research.summary || ''}</div>
+            ${keywordsHTML ? `
+              <div class="research-keywords">
+                <span class="keyword-label">关键字:</span>
+                ${keywordsHTML}
+              </div>` : ''}
             <a href="/pages/research-detail.html?id=${research.id}" class="btn-detail">
               查看详情 <i class="fas fa-arrow-right"></i>
             </a>
