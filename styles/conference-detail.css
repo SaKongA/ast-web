@@ -20,6 +20,8 @@
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .conference-header {
@@ -128,6 +130,8 @@
   margin-top: 40px;
   padding-top: 30px;
   border-top: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .btn {
@@ -138,6 +142,8 @@
   border-radius: 5px;
   transition: all 0.3s ease;
   font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .btn-back {
@@ -212,11 +218,26 @@
   .action-buttons {
     flex-direction: column;
     gap: 15px;
+    padding: 30px 0 0 0;
+  }
+  
+  .conference-header, 
+  .conference-body {
+    padding: 20px;
   }
   
   .btn {
     width: 100%;
     justify-content: center;
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+  }
+  
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
   }
 }
 

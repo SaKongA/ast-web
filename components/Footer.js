@@ -41,7 +41,8 @@ function renderFooter() {
         </div>
         
         <div class="footer-bottom">
-          <p>&copy; ${currentYear} 亚洲科学技术研究院. 版权所有.</p>
+          <p>&copy; ${currentYear} 亚洲科学技术研究院 版权所有 </p>
+          <p class="icp-info"><a href="https://beian.miit.gov.cn/" target="_blank">京ICP备12345678号-1</a></p>
         </div>
       </div>
     </footer>

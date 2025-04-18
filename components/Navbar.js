@@ -1,5 +1,11 @@
 // Navbar.js - 导航组件
 document.addEventListener('DOMContentLoaded', function() {
+  // 初始化导航栏
+  initializeNavbar();
+});
+
+// 初始化导航栏
+function initializeNavbar() {
   // 获取导航栏元素
   const navbar = document.querySelector('.navbar');
   const navbarMenu = document.querySelector('.navbar-menu');
@@ -24,24 +30,59 @@ document.addEventListener('DOMContentLoaded', function() {
       link.classList.add('active');
     }
   });
-});
+  
+  // 汉堡菜单点击事件
+  const hamburger = document.querySelector('.hamburger-menu');
+  if (hamburger && navbarMenu) {
+    hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navbarMenu.classList.toggle('active');
+      
+      // 当菜单打开时，禁止页面滚动
+      if (navbarMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+  }
+  
+  // 点击导航链接后，如果在移动设备上，关闭菜单
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.innerWidth <= 768) {
+        hamburger.classList.remove('active');
+        navbarMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+}
 
 // 渲染导航栏的函数
 function renderNavbar() {
   return `
     <nav class="navbar">
       <div class="navbar-container">
-        <div class="navbar-logo">
-          <img src="/images/logo.png" alt="亚洲科学技术研究院" style="width: 40px; height: 40px; border-radius: 4px;">
-          <h1 style="color: var(--text-primary);">亚洲科学技术研究院</h1>
+        <a href="/" class="navbar-logo" style="text-decoration: none;">
+          <img src="/images/logo.png" alt="亚洲科学技术研究院" style="width: 35px; height: 35px; border-radius: 4px;">
+          <h1 style="color: var(--text-primary); font-size: 1.2rem;">亚洲科学技术研究院</h1>
+        </a>
+        
+        <!-- 汉堡菜单 -->
+        <div class="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
+        
         <ul class="navbar-menu">
-          <li><a href="/" class="${isActive('index')}" style="color: var(--text-primary);">首页</a></li>
-          <li><a href="/conferences.html" class="${isActive('conferences')}" style="color: var(--text-primary);">学术会议</a></li>
-          <li><a href="/research.html" class="${isActive('research')}" style="color: var(--text-primary);">科研成果</a></li>
-          <li><a href="/collaboration.html" class="${isActive('collaboration')}" style="color: var(--text-primary);">国际合作</a></li>
-          <li><a href="/about.html" class="${isActive('about')}" style="color: var(--text-primary);">关于亚科院</a></li>
-          <li><a href="/contact.html" class="${isActive('contact')}" style="color: var(--text-primary);">联系我们</a></li>
+          <li><a href="/" class="${isActive('index')}">首页</a></li>
+          <li><a href="/conferences.html" class="${isActive('conferences')}">学术会议</a></li>
+          <li><a href="/research.html" class="${isActive('research')}">科研成果</a></li>
+          <li><a href="/collaboration.html" class="${isActive('collaboration')}">国际合作</a></li>
+          <li><a href="/about.html" class="${isActive('about')}">关于亚科院</a></li>
+          <li><a href="/contact.html" class="${isActive('contact')}">联系我们</a></li>
         </ul>
       </div>
     </nav>
@@ -58,4 +99,14 @@ function isActive(page) {
 }
 
 // 导出函数用于其他页面引用
-window.renderNavbar = renderNavbar; 
+window.renderNavbar = renderNavbar;
+
+// DOM装载完成后初始化导航栏事件
+document.addEventListener('DOMContentLoaded', function() {
+  // 装载导航栏
+  if (document.getElementById('navbar-container')) {
+    document.getElementById('navbar-container').innerHTML = renderNavbar();
+    // 初始化导航栏事件
+    setTimeout(initializeNavbar, 0);
+  }
+}); 

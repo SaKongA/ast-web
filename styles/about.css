@@ -88,7 +88,6 @@
 }
 
 .about-section {
-  padding: 80px 0 60px;
   background-color: var(--background-dark);
   border-radius: 0;
   box-shadow: none;
@@ -260,7 +259,7 @@
   }
   
   .about-section {
-    padding: 25px 20px 40px;
+    padding: 10px 10px 25px;
   }
   
   .info-title {

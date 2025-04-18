@@ -319,6 +319,12 @@
   display: flex;
   justify-content: center;
   gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
 
 .map-action-btn {
@@ -331,6 +337,9 @@
   text-decoration: none;
   transition: all 0.3s ease;
   gap: 10px;
+  text-align: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .map-action-btn i {
@@ -402,11 +411,13 @@
   .map-actions {
     flex-direction: column;
     gap: 10px;
+    padding: 0 20px;
   }
   
   .map-action-btn {
     width: 100%;
-    justify-content: center;
+    padding: 10px 15px;
+    font-size: 0.95rem;
   }
   
   .contact-method {
@@ -633,75 +644,59 @@
   color: var(--text-tertiary);
 }
 
-/* 创建联系卡片网格容器 */
+/* 联系方式卡片网格 */
 .contact-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  gap: 30px;
+  margin-bottom: 40px;
   width: 100%;
+  box-sizing: border-box;
 }
 
-/* 当显示第4和第5个卡片时（邮箱和工作时间），使用网格自动跨列实现居中 */
-.contact-cards-grid .contact-card:nth-child(4),
-.contact-cards-grid .contact-card:nth-child(5) {
-  grid-column: auto;
+.contact-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* 设置网格在4和5个元素时的特殊情况处理 */
-@media (min-width: 768px) {
-  /* 网格有5个元素时，第4个元素从第1列开始，第5个元素从第3列开始，中间留空 */
-  .contact-cards-grid .contact-card:nth-child(4) {
-    grid-column: 1 / 2;
-  }
-  
-  .contact-cards-grid .contact-card:nth-child(5) {
-    grid-column: 3 / 4;
-  }
-}
-
-/* 在小屏幕上恢复默认排列 */
-@media (max-width: 767px) {
-  .contact-cards-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .contact-cards-grid .contact-card:nth-child(4),
-  .contact-cards-grid .contact-card:nth-child(5) {
-    grid-column: auto;
-  }
+.contact-cards-center {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /* 联系卡片样式 */
 .contact-card {
   background-color: var(--background-card);
   border-radius: 10px;
-  padding: 30px;
-  transition: none;
+  padding: 25px 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto; /* 改为自适应高度 */
+  min-height: 200px; /* 设置最小高度 */
   position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  opacity: 1;
-  transform: none;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.contact-card:hover {
-  transform: translateY(-5px);
-  background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* 卡片图标 */
 .contact-card .card-icon {
   font-size: 2.2rem;
   color: var(--primary-color);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 50px;
 }
 
-/* 卡片标题 */
 .contact-card .card-title {
   font-size: 1.2rem;
   color: var(--text-primary);
@@ -710,11 +705,86 @@
   font-weight: 500;
 }
 
-/* 卡片内容 */
 .contact-card .card-content {
   color: var(--text-secondary);
   text-align: center;
-  line-height: 1.6;
+  line-height: 1.5;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  font-size: 0.95rem;
+  overflow: visible; /* 改为可见溢出 */
+}
+
+@media (max-width: 767px) {
+  .contact-cards-row,
+  .contact-cards-center,
+  .contact-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 5px;
+    width: 100%;
+  }
+  
+  .contact-card {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 25px 10px;
+    margin-bottom: 15px;
+  }
+  
+  .card-content {
+    width: 100%;
+    overflow: visible;
+  }
+  
+  .contact-card a {
+    word-break: break-all;
+    display: inline-block;
+    padding: 2px 0;
+  }
+  
+  /* 修复工作时间在移动端的显示 */
+  .working-hours {
+    width: 100%;
+  }
+  
+  .time-line {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* 修复邮箱显示 */
+  .contact-link {
+    font-size: 0.9rem;
+  }
+  
+  /* 修复地址显示 */
+  .contact-card .card-content {
+    font-size: 0.9rem;
+    padding: 0 5px;
+    hyphens: auto;
+  }
+  
+  /* 增加联系卡片内容容器的弹性 */
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-icon {
+    height: 35px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .card-title {
+    margin-bottom: 10px !important;
+    font-size: 1.1rem !important;
+  }
 }
 
 /* 链接样式 */
@@ -722,8 +792,7 @@
   color: var(--primary-color);
   text-decoration: none;
   transition: color 0.3s;
-  display: inline-block;
-  margin: 3px 0;
+  word-break: break-all; /* 允许邮箱在任意位置换行 */
 }
 
 .contact-card a:hover {
@@ -745,25 +814,29 @@
 
 /* 工作时间样式 */
 .working-hours {
-  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.time-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
   margin-bottom: 8px;
+  width: 100%;
+  word-break: keep-all; /* 防止时间被拆分 */
 }
 
-.working-hours div {
-  margin-bottom: 6px;
-  line-height: 1.5;
-}
-
-.working-hours div:last-child {
-  margin-bottom: 0;
-}
-
-.hours-note {
-  font-style: italic;
-  font-size: 0.9rem;
-  color: var(--text-tertiary);
-  margin-top: 10px;
+.holiday-note {
+  margin-top: 15px !important;
   text-align: center;
+  font-style: italic;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
 }
 
 /* 电话卡片样式优化 */
@@ -878,49 +951,112 @@
   margin: 0;
 }
 
-/* 替代方案：分行布局 */
+/* 联系方式卡片布局 */
 .first-row {
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  width: 100%;
 }
 
 .contact-cards-row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 25px;
-  justify-content: space-between;
+  width: 100%;
 }
 
 .contact-cards-center {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 25px;
-  justify-content: center;
-}
-
-.contact-card {
-  flex: 1;
-  min-width: 250px;
-  max-width: 350px;
-  background-color: var(--background-card);
-  border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-@media (max-width: 767px) {
-  .contact-cards-row,
-  .contact-cards-center {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .contact-card {
-    width: 100%;
-    max-width: 100%;
-  }
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
 }
 
 /* 添加加粗标题样式 */
 .bold-title {
   font-weight: 700;
   letter-spacing: 1px;
+}
+
+/* 移动端特有的布局修复 */
+@media (max-width: 767px) {
+  /* 确保移动端每行只有一张卡片 */
+  .contact-cards-row,
+  .contact-cards-center {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* 调整卡片内部布局和间距 */
+  .contact-card {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin-bottom: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* 减小卡片内图标尺寸 */
+  .contact-card .card-icon {
+    font-size: 1.8rem;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+  
+  /* 调整卡片标题大小 */
+  .contact-card .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  
+  /* 优化卡片内容区域 */
+  .contact-card .card-content {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding: 0;
+  }
+  
+  /* 特别处理邮箱的显示 */
+  .contact-card a {
+    word-break: break-all;
+    font-size: 0.9rem;
+    padding: 3px 0;
+    display: inline-block;
+  }
+  
+  /* 调整工作时间的显示 */
+  .working-hours {
+    width: 100%;
+    padding: 0;
+  }
+  
+  .time-line {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+  
+  /* 调整节假日提示的样式 */
+  .holiday-note {
+    font-size: 0.8rem;
+    margin-top: 10px !important;
+  }
+  
+  /* 调整行之间的间距 */
+  .first-row {
+    margin-bottom: 15px;
+  }
+  
+  /* 调整联系信息区域的内边距 */
+  .contact-section {
+    padding: 40px 0;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
 }

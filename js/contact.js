@@ -122,7 +122,7 @@ function formatWorkingHours(workingHoursText) {
   };
 }
 
-// 修改渲染联系信息函数，保留原有的地图部分，删除动态添加的地图
+// 渲染联系信息
 function renderContactInfo(data) {
   const container = document.querySelector('.contact-section .container');
   if (!container) return;
@@ -160,17 +160,15 @@ function renderContactInfo(data) {
     let phoneLines = [];
     
     if (phones.china.length > 0) {
-      phoneLines.push(`<div class="phone-line">
-        <span class="country-label">中国:</span>
-        <a href="tel:+86${phones.china[0]}" class="contact-link">+86 ${phones.china[0]}</a>
-      </div>`);
+      phoneLines.push(`
+        <div>中国: <a href="tel:+86${phones.china[0]}" class="contact-link">+86 ${phones.china[0]}</a></div>
+      `);
     }
     
     if (phones.singapore.length > 0) {
-      phoneLines.push(`<div class="phone-line">
-        <span class="country-label">新加坡:</span>
-        <a href="tel:+65${phones.singapore[0]}" class="contact-link">+65 ${phones.singapore[0]}</a>
-      </div>`);
+      phoneLines.push(`
+        <div>新加坡: <a href="tel:+65${phones.singapore[0]}" class="contact-link">+65 ${phones.singapore[0]}</a></div>
+      `);
     }
     
     if (phoneLines.length > 0) {

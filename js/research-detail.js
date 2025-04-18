@@ -179,9 +179,11 @@ function showError(message) {
   researchContainer.innerHTML = `
     <div class="error-message">
       <p>${message}</p>
-      <a href="/pages/research.html" class="btn btn-back" style="margin-top: 20px;">
-        <i class="fas fa-arrow-left"></i> 返回科研成果列表
-      </a>
+      <div style="margin-top: 20px; text-align: center;">
+        <a href="/pages/research.html" class="btn btn-back">
+          <i class="fas fa-arrow-left"></i> 返回科研成果列表
+        </a>
+      </div>
     </div>
   `;
 }

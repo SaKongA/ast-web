@@ -43,6 +43,7 @@ function preloadBackgroundMedia() {
 function loadVideoBackground() {
   const video = document.querySelector('.banner-video');
   const fallbackBg = document.querySelector('.fallback-bg');
+  const videoContainer = document.querySelector('.video-container');
   
   if (!video) return;
   
@@ -54,8 +55,8 @@ function loadVideoBackground() {
     (navigator.connection.saveData || 
     (navigator.connection.effectiveType && navigator.connection.effectiveType.includes('2g')));
   
-  // 在移动设备或慢网络情况下直接显示背景图片
-  if (isMobile && window.innerWidth < 768 || isSlowConnection) {
+  // 只在慢网络情况下显示背景图片，移动设备仍然显示视频
+  if (isSlowConnection) {
     video.style.display = 'none';
     if (fallbackBg) {
       fallbackBg.classList.add('visible');
@@ -80,6 +81,12 @@ function loadVideoBackground() {
     clearTimeout(videoTimeout);
     video.classList.add('loaded');
     console.log('视频背景已成功加载');
+    
+    // 确保移动设备上视频正确显示
+    if (isMobile) {
+      adjustVideoSize();
+      window.addEventListener('resize', adjustVideoSize);
+    }
   });
   
   // 视频加载错误处理
@@ -94,6 +101,44 @@ function loadVideoBackground() {
   
   // 强制触发视频加载 - 解决某些浏览器不自动加载问题
   video.load();
+  
+  // 监听屏幕方向变化
+  window.addEventListener('orientationchange', function() {
+    setTimeout(adjustVideoSize, 300); // 方向变化后调整视频尺寸
+  });
+  
+  // 防止页面水平滚动
+  document.body.addEventListener('touchmove', function(e) {
+    if (e.touches.length === 1) {
+      const touchMoveX = e.touches[0].clientX;
+      const touchStartX = e.targetTouches[0].pageX;
+      if (Math.abs(touchMoveX - touchStartX) > 10) {
+        e.preventDefault();
+      }
+    }
+  }, { passive: false });
+}
+
+/**
+ * 调整视频尺寸以适应屏幕
+ */
+function adjustVideoSize() {
+  const video = document.querySelector('.banner-video');
+  if (!video) return;
+  
+  const isPortrait = window.innerHeight > window.innerWidth;
+  
+  if (isPortrait) {
+    // 竖屏模式
+    video.style.width = '100%';
+    video.style.height = '100%';
+    video.style.objectFit = 'cover';
+  } else {
+    // 横屏模式
+    video.style.width = '100%';
+    video.style.height = '100%';
+    video.style.objectFit = 'cover';
+  }
 }
 
 /**
