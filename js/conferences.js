@@ -132,7 +132,8 @@ function renderConferences() {
     if (conference.coverImage && conference.coverImage.url) {
       const imageUrl = conference.coverImage.url.startsWith('http') 
         ? conference.coverImage.url 
-        : `http://localhost:1337${conference.coverImage.url}`;
+        // : `http://localhost:1337${conference.coverImage.url}`;
+        : `http://luck.awacode.top:6753${conference.coverImage.url}`;
       coverImageHtml = `
         <div class="conference-cover">
           <img src="${imageUrl}" alt="${conference.title}" />
